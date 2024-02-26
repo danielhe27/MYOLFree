@@ -3,14 +3,6 @@ const fs = require('fs');
 const shapes = require('./lib/shapes');
 
 
-// {/* <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-
-// <circle cx="150" cy="100" r="80" fill="green" />
-
-// <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
-
-// </svg> */}
-
 
 function writefile(filename, answer) {
   let svgString =
@@ -20,20 +12,23 @@ function writefile(filename, answer) {
 
   let shapeChoice;
   if (answer.shape === 'new Triangle') {
-    shapeChoice = new shapes.triangle();
-    svgString += `<polygon points="100,100 150,25 150,75 200,0"  fill="${triangle.color}" />`;
+    shapeChoice = new shapes.Triangle();
+    svgString += `<polygon points="100,100 150,25 150,75 200,0"  fill="${answer.color}" />`;
   } else if (answer.shape === 'Square') {
     shapeChoice = new shapes.Square();  // Assuming Square is part of shapes module
-    svgString += `<rect x="100" y="100" width="100" height="100" fill="${shapeChoice.color}" />`;
+    svgString += `<rect x="100" y="100" width="100" height="100" fill="${answer.color}" />`;
   } else if (answer.shape === 'Circle') {
     shapeChoice = new shapes.Circle();  // Assuming Circle is part of shapes module
-    svgString += `<circle cx="150" cy="100" r="50" fill="${shapeChoice.color}" />`;
+    svgString += `<circle cx="150" cy="100" r="50" fill="${answer.color}" />`;
   }
 
-  svgString += `<text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text fill="${shapeChoice.textcolor}" />`;
+  svgString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answer.textcolor}">${answer.filename}</text>`;
 
-  svgString += '</g>';
-  svgString += '</svg>';
+  // Closing </g> tag
+  svgString += "</g>";
+
+  // Closing </svg> tag
+  svgString += "</svg>";
 
   fs.writeFile(filename, svgString, (err) => {
     if (err) {
@@ -43,6 +38,7 @@ function writefile(filename, answer) {
     }
   });
 }
+
 
 function promptUser() {
   return inquirer.prompt([
@@ -55,7 +51,7 @@ function promptUser() {
     {
       type: 'input',
       name: 'color',
-      message: 'What color would you like your shape to be?',
+      message: 'What color would you like your shape to be, please type a hex value or a color name',
     },
     {
       type: 'input',
@@ -69,7 +65,7 @@ function promptUser() {
     },
   ])
   .then(answer => {
-    if (answer.filename.length > 3) {
+    if (answer.filename.length > 6) {
       console.log('Please enter a valid filename');
       promptUser();
     } else {

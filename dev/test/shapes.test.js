@@ -1,4 +1,6 @@
 const { Triangle } = require('../lib/shapes');
+const { Square } = require('../lib/shapes'); 
+const { Circle } = require('../lib/shapes');
 
 describe('Triangle', () => {
   test('render method should generate correct SVG representation', () => {
@@ -15,6 +17,26 @@ describe('Triangle', () => {
 });
 
 
+describe('Square', () => {
+  test('render method should generate correct SVG representation', () => {
+    // Arrange
+    const color = '';
+    const squareInstance = new Square(color);
+
+    const svgRepresentation = squareInstance.render();
+    expect(svgRepresentation).toEqual(`<rect x="100" y="100" width="100" height="100" fill="${color}" />`);
+  });
+});
+
+describe('Circle', () => {
+  test('render method should generate correct SVG representation', () => {
+    // Arrange
+    const color = '';
+    const circleInstance = new Circle(color);
+    const svgRepresentation = circleInstance.render();
+    expect(svgRepresentation).toEqual(`<circle cx="150" cy="100" r="50" fill="${color}" />`);
+  });
+});
 
 
 // describe('Square', () => {
