@@ -6,20 +6,22 @@ const shapes = require('./lib/shapes');
 
 function writefile(filename, answer) {
   let svgString =
-    '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
+    '<svg version="1.1" width="500" height="500" xmlns="http://www.w3.org/2000/svg">';
   svgString += "<g>";
   svgString += `${answer.shape}`;
 
   let shapeChoice;
-  if (answer.shape === 'new Triangle') {
+  if (answer.shape === 'Triangle') {
     shapeChoice = new shapes.Triangle();
-    svgString += `<polygon points="100,100 150,25 150,75 200,0"  fill="${answer.color}" />`;
-  } else if (answer.shape === 'Square') {
+    svgString += `<polygon points="0,200 150,0 300,200" fill="${answer.color}" />`;
+  } 
+  else if (answer.shape === 'Square') {
     shapeChoice = new shapes.Square();  // Assuming Square is part of shapes module
-    svgString += `<rect x="100" y="100" width="100" height="100" fill="${answer.color}" />`;
-  } else if (answer.shape === 'Circle') {
+    svgString += `<rect x="150" y="100" width="200" height="200"  fill="${answer.color}" />`;
+  }
+   else if (answer.shape === 'Circle') {
     shapeChoice = new shapes.Circle();  // Assuming Circle is part of shapes module
-    svgString += `<circle cx="150" cy="100" r="50" fill="${answer.color}" />`;
+    svgString += `<circle cx="150" cy="100" r="100" fill="${answer.color}" />`;
   }
 
   svgString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answer.textcolor}">${answer.filename}</text>`;
