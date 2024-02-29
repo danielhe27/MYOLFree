@@ -6,26 +6,29 @@ const shapes = require('./lib/shapes');
 
 function writefile(filename, answer) {
   let svgString =
-    '<svg version="1.1" width="500" height="500" xmlns="http://www.w3.org/2000/svg">';
-  svgString += "<g>";
+  '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">';
+  svgString += '<g transform="translate(20,70)">';
+  
   svgString += `${answer.shape}`;
 
   let shapeChoice;
   if (answer.shape === 'Triangle') {
     shapeChoice = new shapes.Triangle();
     svgString += `<polygon points="0,200 150,0 300,200" fill="${answer.color}" />`;
+    svgString += `<text x="150" y="95" text-anchor="middle" font-size="40" fill="${answer.textcolor}">${answer.filename}</text>`;
   } 
   else if (answer.shape === 'Square') {
     shapeChoice = new shapes.Square();  // Assuming Square is part of shapes module
-    svgString += `<rect x="150" y="100" width="200" height="200"  fill="${answer.color}" />`;
+    svgString += `<rect x="80" y="30" width="140" height="140"  fill="${answer.color}" />`;
+    svgString += `<text x="150" y="95" text-anchor="middle" font-size="40" fill="${answer.textcolor}">${answer.filename}</text>`;
   }
    else if (answer.shape === 'Circle') {
     shapeChoice = new shapes.Circle();  // Assuming Circle is part of shapes module
-    svgString += `<circle cx="150" cy="100" r="100" fill="${answer.color}" />`;
+    svgString += `<circle cx="142" cy="20" r="70"" fill="${answer.color}" />`;
+    svgString += `<text x="140" y="35" text-anchor="middle" font-size="40" fill="${answer.textcolor}">${answer.filename}</text>`;
   }
 
-  svgString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answer.textcolor}">${answer.filename}</text>`;
-
+  
   // Closing </g> tag
   svgString += "</g>";
 
