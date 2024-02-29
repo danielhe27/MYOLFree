@@ -94,11 +94,11 @@ function promptUser() {
 // this function will take the answer from the promptUser function and pass it to the writefile function.
   .then(answer => {
     // conditional statement to check if the filename is more than 3 characters.
-    if (answer.filename.length > 3) {
-    // if the filename is more than 3 characters, it will call the promptUser function again.
+    if (answer.filename.length > 6) {
+    // if the filename is more than 6 characters, it will call the promptUser function again.
       console.log('Please enter a valid filename');
       promptUser();
-    // if the filename acomplishs 3 characters, it will call the writefile function.
+    // if the filename acomplishs 6 characters, it will call the writefile function.
     } else {
       writefile("logo.svg", answer);
     }
